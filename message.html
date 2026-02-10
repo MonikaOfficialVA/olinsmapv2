@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Messages – Olinsterg College Digital Map</title>
+
+<style>
+/* GLOBAL STYLE */
+* {margin:0; padding:0; box-sizing:border-box; font-family:Arial,sans-serif;}
+body, html {height:100%; background:#001a33; color:#fff;}
+
+/* ANIMATED BACKGROUND */
+body::before {
+    content:"";
+    position:fixed; top:0; left:0; width:100%; height:100%;
+    background: linear-gradient(270deg, #001a33, #003366, #001a33, #0055a5);
+    background-size: 800% 800%;
+    z-index:-1;
+    animation: gradientMove 20s ease infinite;
+}
+@keyframes gradientMove {
+    0% {background-position:0% 50%;}
+    50% {background-position:100% 50%;}
+    100% {background-position:0% 50%;}
+}
+
+header {text-align:center; padding:25px; text-shadow:0 0 10px #00d4ff,0 0 20px #00ffff;}
+header h1 {font-size:36px; color:#00e5ff;}
+header p {color:#80e0ff; font-size:16px;}
+
+.container {width:90%; max-width:1000px; margin:40px auto;}
+
+h2 {text-align:center; color:#00ffff; font-size:28px; margin-bottom:25px; text-shadow:0 0 10px #00ffff,0 0 20px #00d4ff;}
+
+.messages-box {
+    background: rgba(0,51,102,0.8);
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow:0 0 15px #00d4ff;
+    max-height: 500px;
+    overflow-y: auto;
+}
+
+.message {
+    border-bottom: 1px solid #00d4ff;
+    padding: 10px 0;
+}
+
+.message:last-child {border-bottom:none;}
+.message h3 {color:#00ffff; margin-bottom:5px; font-size:18px;}
+.message p {color:#ccefff; margin-bottom:5px; font-size:15px;}
+.message em {color:#80e0ff; font-size:13px;}
+
+.actions {
+    margin-top: 25px;
+    text-align:center;
+}
+
+.actions a {
+    display:inline-block;
+    margin:5px;
+    color: #00d4ff;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 10px 20px;
+    border-radius:8px;
+    background: rgba(0,0,0,0.3);
+    box-shadow:0 0 10px #00d4ff;
+}
+
+.actions a:hover {
+    background: rgba(0,255,255,0.2);
+    color: #00ffff;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>Olinsterg College Digital Map</h1>
+    <p>Admin Messages</p>
+</header>
+
+<div class="container">
+    <h2>User Feedback Messages</h2>
+
+    <div class="messages-box" id="messagesBox">
+        <!-- Messages will load here -->
+    </div>
+
+    <div class="actions">
+        <a href="#" onclick="clearMessages()">🗑 Clear All Messages</a>
+        <a href="admin.html">⟵ Back to Dashboard</a>
+    </div>
+</div>
+
+<script>
+const messagesBox = document.getElementById('messagesBox');
+let messages = JSON.parse(localStorage.getItem('messages') || '[]');
+
+// DISPLAY MESSAGES
+function displayMessages(){
+    if(messages.length === 0){
+        messagesBox.innerHTML =
+            "<p style='text-align:center; color:#80e0ff;'>No messages yet.</p>";
+    } else {
+        messagesBox.innerHTML = messages.map(msg => `
+            <div class="message">
+                <h3>${msg.name} (${msg.email})</h3>
+                <p>${msg.message}</p>
+                <em>${msg.date}</em>
+            </div>
+        `).join('');
+    }
+}
+
+displayMessages();
+
+// CLEAR ALL FEEDBACK
+function clearMessages(){
+    if(confirm("Are you sure you want to delete all feedback messages?")){
+        localStorage.removeItem('messages');
+        messages = [];
+        displayMessages();
+        alert("All feedback messages have been cleared.");
+    }
+}
+</script>
+
+</body>
+</html>

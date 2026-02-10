@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Dashboard – Olinsterg College Digital Map</title>
+
+<style>
+    /* GLOBAL STYLE */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, sans-serif;
+    }
+
+    body, html {
+        height: 100%;
+        background: #001a33;
+        color: #fff;
+    }
+
+    /* ANIMATED GRADIENT BACKGROUND */
+    body::before {
+        content: "";
+        position: fixed;
+        top: 0; left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(270deg, #001a33, #003366, #001a33, #0055a5);
+        background-size: 800% 800%;
+        z-index: -1;
+        animation: gradientMove 20s ease infinite;
+    }
+
+    @keyframes gradientMove {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+
+    /* HEADER */
+    header {
+        text-align: center;
+        padding: 25px;
+        text-shadow: 0 0 10px #00d4ff, 0 0 20px #00ffff;
+    }
+
+    header h1 {
+        font-size: 36px;
+        color: #00e5ff;
+    }
+
+    header p {
+        color: #80e0ff;
+    }
+
+    /* DASHBOARD */
+    .dashboard {
+        width: 90%;
+        max-width: 1200px;
+        margin: 40px auto;
+        text-align: center;
+        position: relative;
+        z-index: 1;
+    }
+
+    .dashboard h2 {
+        color: #00ffff;
+        margin-bottom: 10px;
+        text-shadow: 0 0 10px #00d4ff, 0 0 20px #00ffff;
+    }
+
+    .dashboard p {
+        color: #ccefff;
+        margin-bottom: 25px;
+    }
+
+    /* GRID MENU */
+    .admin-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 25px;
+    }
+
+    .card {
+        background: rgba(0,51,102,0.7);
+        padding: 25px;
+        border-radius: 12px;
+        text-align: center;
+        box-shadow: 0 0 15px #00d4ff;
+        transition: 0.3s;
+    }
+
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 0 25px #00ffff;
+    }
+
+    .card h3 {
+        color: #00ffff;
+        margin-bottom: 12px;
+        text-shadow: 0 0 5px #00d4ff;
+    }
+
+    .card p {
+        color: #ccefff;
+        margin-bottom: 20px;
+    }
+
+    .btn-card {
+        display: inline-block;
+        padding: 10px 20px;
+        background: #00d4ff;
+        color: #001a33;
+        text-decoration: none;
+        border-radius: 8px;
+        font-weight: bold;
+        box-shadow: 0 0 10px #00d4ff;
+        transition: 0.3s;
+    }
+
+    .btn-card:hover {
+        background: #00ffff;
+        box-shadow: 0 0 20px #00ffff;
+    }
+
+    /* LOGOUT BUTTON */
+    .logout-box {
+        text-align: center;
+        margin-top: 35px;
+    }
+
+    .logout-box a {
+        text-decoration: none;
+        color: #001a33;
+        background: #ff5555;
+        padding: 10px 25px;
+        border-radius: 8px;
+        font-weight: bold;
+        box-shadow: 0 0 10px #ff5555;
+        transition: 0.3s;
+    }
+
+    .logout-box a:hover {
+        background: #ff2222;
+        box-shadow: 0 0 20px #ff4444;
+    }
+
+</style>
+</head>
+
+<body>
+
+    <header>
+        <h1>Olinsterg College Digital Map</h1>
+        <p>Admin Dashboard</p>
+    </header>
+
+    <div class="dashboard">
+        <h2>Welcome, Admin</h2>
+        <p>Manage campus buildings, update map data, and handle system information.</p>
+
+        <!-- GRID MENU -->
+        <div class="admin-grid">
+
+            <div class="card">
+                <h3>Manage Buildings</h3>
+                <p>Add, edit, or update building information in the campus map.</p>
+                <a href="map2.html" class="btn-card">Open</a>
+            </div>
+
+            <div class="card">
+                <h3>Manage Rooms</h3>
+                <p>Edit room details such as room number, designation, and departments.</p>
+                <a href="#" class="btn-card">Open</a>
+            </div>
+
+            <div class="card">
+                <h3>Update Campus Map</h3>
+                <p>Upload new map files or replace outdated campus layouts.</p>
+                <a href="#" class="btn-card">Open</a>
+            </div>
+
+            <div class="card">
+                <h3>Feedback Messages</h3>
+                <p>View messages submitted by users through the Contact page.</p>
+                <a href="message.html" class="btn-card">View</a>
+            </div>
+
+        </div>
+
+        <!-- LOGOUT -->
+        <div class="logout-box">
+            <a href="login.html">Logout</a>
+        </div>
+    </div>
+
+</body>
+</html>

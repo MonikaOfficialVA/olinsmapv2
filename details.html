@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Building Details – Olinsterg College</title>
+
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+        background: radial-gradient(circle at center, #081b29, #000000);
+        color: #00eaff;
+        text-align: center;
+    }
+
+    h1 {
+        margin-top: 30px;
+        font-size: 32px;
+        color: #00eaff;
+        text-shadow: 0 0 12px #00eaff;
+    }
+
+    p {
+        color: #88d9ff;
+        margin-bottom: 25px;
+        font-size: 16px;
+    }
+
+    .container {
+        width: 95%;
+        max-width: 1100px;
+        margin: 30px auto;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 25px;
+    }
+
+    .card {
+        background: rgba(0, 40, 70, 0.4);
+        border: 2px solid #00eaff;
+        border-radius: 12px;
+        padding: 20px;
+        box-shadow: 0 0 18px #00eaff;
+        transition: 0.3s;
+        cursor: pointer;
+    }
+
+    .card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 0 28px #00ffff;
+        border-color: #00ffff;
+    }
+
+    .card h2 {
+        color: #00ffff;
+        font-size: 22px;
+        text-shadow: 0 0 8px #00ffff;
+        margin-bottom: 10px;
+    }
+
+    .card p {
+        color: #c8f6ff;
+        font-size: 15px;
+        line-height: 1.5;
+    }
+
+    .back {
+        display: inline-block;
+        margin-top: 30px;
+        padding: 10px 20px;
+        background: #003f7a;
+        color: white;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: bold;
+        transition: 0.3s;
+        box-shadow: 0 0 12px #00eaff;
+    }
+
+    .back:hover {
+        background: #005eff;
+        box-shadow: 0 0 18px #00ffff;
+    }
+</style>
+</head>
+
+<body>
+
+<h1>Olinsterg College – Building Details</h1>
+<p>Select a building to view quick information.</p>
+
+<div class="container">
+
+    <!-- Science Building -->
+    <div class="card">
+        <h2>Lobby</h2>
+        <p>• Welcome Screen / Display<br>
+           • Reception Desk<br>
+           • Directory Board<br>
+           • Mommy  Apple
+        </p>
+    </div>
+
+    <!-- Library -->
+    <div class="card">
+        <h2>Library</h2>
+        <p>• Books<br>
+           • Study Rooms<br>
+           • Computer Research Area<br>
+           • Silent Reading Zone
+        </p>
+    </div>
+
+    <!-- Administration -->
+    <div class="card">
+        <h2>Administration</h2>
+        <p>• Registrar’s Office<br>
+           • Accounting Office<br>
+           • Principal / Dean Office<br>
+           • Records & ID Processing
+        </p>
+    </div>
+
+    <!-- Engineering -->
+    <div class="card">
+        <h2>Canteen</h2>
+        <p>• Menu<br>
+           • G-cash Payment
+        </p>
+    </div>
+
+    <!-- Gymnasium -->
+    <div class="card">
+        <h2>Gymnasium</h2>
+        <p>• Basketball Court<br>
+           • Stage Area<br>
+           • Events & PE Activities<br>
+           • Training Rooms
+        </p>
+    </div>
+
+    <!-- Cafeteria -->
+    <div class="card">
+        <h2>Parking Lot</h2>
+        <p>• Safety & Security<br>
+           • Parking Slot Indicators<br>
+           • Pedestrian Safety<br>
+           • Refreshment Area
+        </p>
+    </div>
+
+</div>
+
+<a class="back" href="user.html">⟵ Back to Dashboard</a>
+
+</body>
+</html>

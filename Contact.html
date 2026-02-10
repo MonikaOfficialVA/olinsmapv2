@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact – Olinsterg College Digital Map</title>
+
+<style>
+/* GLOBAL STYLE */
+* {margin:0; padding:0; box-sizing:border-box; font-family:Arial,sans-serif;}
+body, html {height:100%; background:#001a33; color:#fff;}
+
+/* ANIMATED GRADIENT BACKGROUND */
+body::before {
+    content:"";
+    position:fixed; top:0; left:0; width:100%; height:100%;
+    background: linear-gradient(270deg, #001a33, #003366, #001a33, #0055a5);
+    background-size: 800% 800%;
+    z-index:-1;
+    animation: gradientMove 20s ease infinite;
+}
+@keyframes gradientMove {0% {background-position:0% 50%;} 50% {background-position:100% 50%;} 100% {background-position:0% 50%;}}
+
+header {text-align:center; padding:25px; text-shadow:0 0 10px #00d4ff, 0 0 20px #00ffff;}
+header h1 {font-size:36px; color:#00e5ff;}
+header p {color:#80e0ff; font-size:16px;}
+
+/* CONTACT CONTAINER */
+.contact-container {
+    width:90%; max-width:700px; background:rgba(0,51,102,0.8);
+    padding:35px; margin:40px auto; border-radius:12px; box-shadow:0 0 20px #00d4ff; backdrop-filter:blur(10px);
+}
+
+.contact-container h2 {text-align:center; color:#00ffff; font-size:28px; margin-bottom:15px; text-shadow:0 0 10px #00ffff,0 0 20px #00d4ff; animation:glow 2s ease-in-out infinite alternate;}
+@keyframes glow {0% {text-shadow:0 0 5px #00ffff,0 0 10px #00d4ff;} 100% {text-shadow:0 0 15px #00ffff,0 0 25px #00d4ff;}}
+
+.contact-container p {text-align:center; color:#ccefff; margin-bottom:25px;}
+
+/* FORM */
+.input-group {margin-bottom:18px;}
+.input-group label {display:block; margin-bottom:6px; font-weight:bold; color:#00d4ff;}
+.input-group input, .input-group textarea {
+    width:100%; padding:12px; border-radius:8px; border:1px solid #00d4ff; background:rgba(0,0,0,0.3); color:#fff; font-size:16px; resize:none;
+}
+.input-group input::placeholder, .input-group textarea::placeholder {color:#80e0ff;}
+.input-group input:focus, .input-group textarea:focus {outline:none; border:1px solid #00ffff; box-shadow:0 0 10px #00d4ff; background:rgba(0,0,0,0.5);}
+textarea {height:130px;}
+
+/* BUTTON */
+.btn-send {
+    width:100%; padding:12px; border:none; border-radius:8px;
+    background:#00d4ff; color:#001a33; font-size:16px; font-weight:bold; cursor:pointer; text-transform:uppercase;
+    box-shadow:0 0 10px #00d4ff,0 0 20px #00ffff; transition:0.3s;
+}
+.btn-send:hover {box-shadow:0 0 20px #00d4ff,0 0 40px #00ffff; background:#00ffff;}
+
+/* BACK LINK */
+.back-home {margin-top:20px; text-align:center;}
+.back-home a {color:#00d4ff; text-decoration:none; font-weight:bold;}
+.back-home a:hover {text-decoration:underline; color:#00ffff;}
+
+/* CONTACT INFO */
+.info-box {background:rgba(0,0,0,0.3); padding:20px; border-radius:12px; margin-top:30px; box-shadow:0 0 15px #00d4ff;}
+.info-box h3 {color:#00ffff; margin-bottom:10px; text-shadow:0 0 5px #00d4ff;}
+.info-box p {margin-bottom:5px; color:#ccefff;}
+
+/* CONFIRMATION MESSAGE */
+.confirmation {
+    display:none; margin-top:20px; text-align:center;
+    padding:15px; border-radius:8px; background:rgba(0,255,255,0.2);
+    color:#00ffff; text-shadow:0 0 5px #00ffff;
+    box-shadow:0 0 15px #00d4ff;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>Olinsterg College Digital Map</h1>
+    <p>Contact Information & Support</p>
+</header>
+
+<div class="contact-container">
+    <h2>Contact Us</h2>
+    <p>For inquiries, feedback, or assistance, please send us a message.</p>
+
+    <form id="contactForm">
+        <div class="input-group">
+            <label for="name">Full Name</label>
+            <input type="text" id="name" placeholder="Enter your full name" required>
+        </div>
+
+        <div class="input-group">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" placeholder="Enter your email" required>
+        </div>
+
+        <div class="input-group">
+            <label for="message">Your Message</label>
+            <textarea id="message" placeholder="Write your message here..." required></textarea>
+        </div>
+
+        <button class="btn-send" type="submit">Send Message</button>
+    </form>
+
+    <div class="confirmation" id="confirmation"></div>
+
+    <div class="back-home">
+        <a href="index.html">⟵ Back to Home</a>
+    </div>
+
+    <div class="info-box">
+        <h3>Olinsterg College Main Office</h3>
+        <p><strong>Address:</strong> Olinsterg Campus, Lumingon Street</p>
+        <p><strong>Email:</strong> support@olinsterg.edu</p>
+        <p><strong>Phone:</strong> 0912-345-6789</p>
+        <p><strong>Office Hours:</strong> Mon–Fri | 8:00 AM – 5:00 PM</p>
+    </div>
+</div>
+
+<script>
+const form = document.getElementById('contactForm');
+const confirmation = document.getElementById('confirmation');
+
+form.addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const name = document.getElementById('name').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const message = document.getElementById('message').value.trim();
+
+    let messages = JSON.parse(localStorage.getItem('messages') || '[]');
+    messages.push({
+        name: name,
+        email: email,
+        message: message,
+        date: new Date().toLocaleString()
+    });
+    localStorage.setItem('messages', JSON.stringify(messages));
+
+    // FIXED — added backticks
+    confirmation.style.display = 'block';
+    confirmation.innerHTML = `Thank you, <strong>${name}</strong>! Your message has been received.`;
+
+    form.reset();
+});
+</script>
+
+</body>
+</html>

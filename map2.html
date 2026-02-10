@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Olinsterg College Map</title>
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background: radial-gradient(circle at center, #081b29, #000000);
+    text-align: center;
+    padding: 20px;
+    color: #00eaff;
+}
+
+h2 {
+    text-shadow: 0 0 10px #00eaff;
+    margin-bottom: 20px;
+    font-size: 28px;
+}
+
+svg {
+    border: 2px solid #00eaff;
+    background: rgba(0, 20, 40, 0.6);
+    max-width: 900px;
+    width: 100%;
+    border-radius: 12px;
+    box-shadow: 0 0 20px #00eaff;
+}
+
+.building {
+    fill: url(#neonGradient);
+    cursor: pointer;
+    transition: 0.3s;
+    stroke: #00eaff;
+    stroke-width: 2px;
+    filter: drop-shadow(0 0 6px #00eaff);
+}
+
+.building:hover {
+    fill: url(#hoverGradient);
+    filter: drop-shadow(0 0 12px #00eaff);
+    transform: scale(1.03);
+}
+
+.label-div {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 15px;
+    text-align: center;
+    user-select: none;
+}
+
+/* Admin mode: editable */
+.admin .label-div {
+    user-select: text;
+    outline: 1px dashed #00eaff;
+}
+
+.back, .admin-btn, .save-btn {
+    display: inline-block;
+    margin-top: 15px;
+    text-decoration: none;
+    color: #00eaff;
+    font-weight: bold;
+    font-size: 18px;
+    text-shadow: 0 0 10px #00eaff;
+    cursor: pointer;
+    margin-right: 10px;
+}
+</style>
+</head>
+
+<body>
+
+<h2>Olinsterg College Campus Map</h2>
+
+<svg viewBox="0 0 900 650">
+
+<defs>
+    <linearGradient id="neonGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#005eff"/>
+        <stop offset="100%" stop-color="#00eaff"/>
+    </linearGradient>
+
+    <linearGradient id="hoverGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#00eaff"/>
+        <stop offset="100%" stop-color="#00ffff"/>
+    </linearGradient>
+</defs>
+
+<!-- CAMPUS BORDER -->
+<rect x="40" y="40" width="820" height="570"
+      fill="rgba(0,40,70,0.6)"
+      stroke="#00eaff"
+      stroke-width="3"/>
+
+<!-- ROW 1 -->
+<rect class="building" x="80" y="80" width="160" height="90" onclick="goTo('legend.html')" />
+<foreignObject x="80" y="80" width="160" height="90">
+  <div class="label-div" data-id="legend" contenteditable="false">Legend Key</div>
+</foreignObject>
+
+<rect class="building" x="280" y="80" width="160" height="90" onclick="goTo('ground.html')" />
+<foreignObject x="280" y="80" width="160" height="90">
+  <div class="label-div" data-id="ground" contenteditable="false">Ground Floor</div>
+</foreignObject>
+
+<rect class="building" x="480" y="80" width="160" height="90" onclick="goTo('second.html')" />
+<foreignObject x="480" y="80" width="160" height="90">
+  <div class="label-div" data-id="second" contenteditable="false">Second Floor</div>
+</foreignObject>
+
+<rect class="building" x="680" y="80" width="160" height="90" onclick="goTo('third.html')" />
+<foreignObject x="680" y="80" width="160" height="90">
+  <div class="label-div" data-id="third" contenteditable="false">Third Floor</div>
+</foreignObject>
+
+<!-- ROW 2 -->
+<rect class="building" x="80" y="210" width="160" height="90" onclick="goTo('Roof.html')" />
+<foreignObject x="80" y="210" width="160" height="90">
+  <div class="label-div" data-id="roof" contenteditable="false">Roof Deck</div>
+</foreignObject>
+
+<rect class="building" x="280" y="210" width="160" height="90" onclick="goTo('library.html')" />
+<foreignObject x="280" y="210" width="160" height="90">
+  <div class="label-div" data-id="library" contenteditable="false">Library</div>
+</foreignObject>
+
+<rect class="building" x="480" y="210" width="160" height="90" onclick="goTo('faculty.html')" />
+<foreignObject x="480" y="210" width="160" height="90">
+  <div class="label-div" data-id="faculty" contenteditable="false">Faculty Office</div>
+</foreignObject>
+
+<rect class="building" x="680" y="210" width="160" height="90" onclick="goTo('cafeteria.html')" />
+<foreignObject x="680" y="210" width="160" height="90">
+  <div class="label-div" data-id="cafeteria" contenteditable="false">Cafeteria</div>
+</foreignObject>
+
+<!-- ROW 3 -->
+<rect class="building" x="180" y="340" width="180" height="100" onclick="goTo('gym.html')" />
+<foreignObject x="180" y="340" width="180" height="100">
+  <div class="label-div" data-id="gym" contenteditable="false">Gymnasium</div>
+</foreignObject>
+
+<rect class="building" x="520" y="340" width="180" height="100" onclick="goTo('parking.html')" />
+<foreignObject x="520" y="340" width="180" height="100">
+  <div class="label-div" data-id="parking" contenteditable="false">Parking Area</div>
+</foreignObject>
+
+<rect class="building" x="310" y="480" width="280" height="100" onclick="goTo('Olins map.html')" />
+<foreignObject x="310" y="480" width="280" height="100">
+  <div class="label-div" data-id="allmap" style="font-weight:bold; font-size:18px;" contenteditable="false">All Campus Map</div>
+</foreignObject>
+
+</svg>
+
+<div>
+    <span class="admin-btn" onclick="toggleAdmin()">🔑 Toggle Admin Mode</span>
+    <span class="save-btn" onclick="saveAllLabels()">💾 Save All Labels</span>
+    <a class="back" href="admin.html">⟵ Back to Admin</a>
+</div>
+
+<script>
+let isAdmin = false;
+
+// Toggle Admin Mode
+function toggleAdmin() {
+    isAdmin = !isAdmin;
+    document.body.classList.toggle("admin", isAdmin);
+    document.querySelectorAll(".label-div").forEach(label => {
+        label.contentEditable = isAdmin;
+        if(isAdmin) {
+            // auto-save on blur
+            label.addEventListener("blur", saveLabel);
+        } else {
+            label.removeEventListener("blur", saveLabel);
+        }
+    });
+    alert(isAdmin ? "Admin mode enabled: you can edit labels" : "Admin mode disabled");
+}
+
+// Save a single label to localStorage
+function saveLabel(e) {
+    localStorage.setItem(e.target.dataset.id, e.target.textContent);
+}
+
+// Save all labels manually
+function saveAllLabels() {
+    document.querySelectorAll(".label-div").forEach(label => {
+        localStorage.setItem(label.dataset.id, label.textContent);
+    });
+    alert("All labels saved!");
+}
+
+// Load saved labels on page load
+document.querySelectorAll(".label-div").forEach(label => {
+    const saved = localStorage.getItem(label.dataset.id);
+    if(saved) label.textContent = saved;
+});
+
+// Navigation function
+function goTo(page) {
+    window.location.href = page;
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>User Dashboard – Olinsterg College Digital Map</title>
+
+<style>
+    /* GLOBAL STYLE */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, sans-serif;
+    }
+
+    body, html {
+        height: 100%;
+        background: #001a33;
+        color: #fff;
+    }
+
+    /* ANIMATED GRADIENT BACKGROUND */
+    body::before {
+        content: "";
+        position: fixed;
+        top: 0; left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(270deg, #001a33, #003366, #001a33, #0055a5);
+        background-size: 800% 800%;
+        z-index: -1;
+        animation: gradientMove 20s ease infinite;
+    }
+
+    @keyframes gradientMove {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+
+    header {
+        text-align: center;
+        padding: 25px;
+        text-shadow: 0 0 10px #00d4ff, 0 0 20px #00ffff;
+    }
+
+    header h1 {
+        font-size: 36px;
+        color: #00e5ff;
+    }
+
+    header p {
+        color: #80e0ff;
+    }
+
+    .container {
+        width: 90%;
+        max-width: 1100px;
+        margin: 40px auto;
+        text-align: center;
+        position: relative;
+        z-index: 1;
+    }
+
+    h2 {
+        color: #00ffff;
+        margin-bottom: 10px;
+        text-shadow: 0 0 10px #00d4ff, 0 0 20px #00ffff;
+    }
+
+    p {
+        color: #ccefff;
+        margin-bottom: 25px;
+    }
+
+    /* FEATURES GRID */
+    .features {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+    }
+
+    .card {
+        background: rgba(0,51,102,0.7);
+        padding: 25px;
+        border-radius: 12px;
+        text-align: center;
+        box-shadow: 0 0 15px #00d4ff;
+        transition: 0.3s;
+    }
+
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 0 25px #00ffff;
+    }
+
+    .card h3 {
+        color: #00ffff;
+        margin-bottom: 10px;
+        text-shadow: 0 0 5px #00d4ff;
+    }
+
+    .card p {
+        color: #ccefff;
+        margin-bottom: 15px;
+    }
+
+    .btn-card {
+        display: inline-block;
+        padding: 10px 20px;
+        background: #00d4ff;
+        color: #001a33;
+        text-decoration: none;
+        border-radius: 8px;
+        font-weight: bold;
+        box-shadow: 0 0 10px #00d4ff;
+        transition: 0.3s;
+    }
+
+    .btn-card:hover {
+        background: #00ffff;
+        box-shadow: 0 0 20px #00ffff;
+    }
+
+    .logout-box {
+        text-align: center;
+        margin-top: 35px;
+    }
+
+    .logout-box a {
+        text-decoration: none;
+        color: #001a33;
+        background: #ff5555;
+        padding: 10px 25px;
+        border-radius: 8px;
+        font-weight: bold;
+        box-shadow: 0 0 10px #ff5555;
+        transition: 0.3s;
+    }
+
+    .logout-box a:hover {
+        background: #ff2222;
+        box-shadow: 0 0 20px #ff4444;
+    }
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>Olinsterg College Digital Map</h1>
+    <p>User Dashboard</p>
+</header>
+
+<div class="container">
+    <h2>Welcome, User</h2>
+    <p>Explore the campus map and find buildings, rooms, and facilities easily.</p>
+
+    <div class="features">
+        <div class="card">
+            <h3>View Campus Map</h3>
+            <p>Check the interactive campus map to locate buildings and facilities.</p>
+            <a href="map.html" class="btn-card">Open Map</a>
+        </div>
+
+        <div class="card">
+            <h3>Building Details</h3>
+            <p>See information about departments, classrooms, and offices.</p>
+            <a href="details.html" class="btn-card">View Details</a>
+        </div>
+
+        <div class="card">
+            <h3>Contact Admin</h3>
+            <p>Send messages or feedback to the admin for any inquiries.</p>
+            <a href="contact2.html" class="btn-card">Contact</a>
+        </div>
+    </div>
+
+    <div class="logout-box">
+        <a href="login.html">Logout</a>
+    </div>
+</div>
+
+</body>
+</html>
