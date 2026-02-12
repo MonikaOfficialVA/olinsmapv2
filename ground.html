@@ -7,13 +7,22 @@
 
 <style>
 body {
+    margin: 0;
     font-family: Arial, sans-serif;
     background: radial-gradient(circle at center, #081b29, #000000);
-    text-align: center;
-    padding: 20px;
     color: #00eaff;
-    margin: 0;
-    padding-bottom: 100px; /* para may space sa footer */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Center Content */
+.main-content {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
 }
 
 /* Ground Floor Image */
@@ -23,17 +32,13 @@ body {
     border: 2px solid #00eaff;
     border-radius: 12px;
     box-shadow: 0 0 25px #00eaff;
-    margin-bottom: 25px;
 }
 
 /* Footer */
 footer {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    background: #000;
+    text-align: center;
     padding: 20px 0;
+    background: #000;
     box-shadow: 0 -5px 15px rgba(0, 234, 255, 0.3);
 }
 
@@ -61,10 +66,10 @@ button:hover {
 
 <body>
 
-<!-- GROUND FLOOR IMAGE -->
-<img src="ground.jpg" alt="Ground Floor Layout" class="floor-img">
+<div class="main-content">
+    <img src="ground.jpg" alt="Ground Floor Layout" class="floor-img">
+</div>
 
-<!-- FOOTER -->
 <footer>
     <button onclick="goBack()">⟵ Back to Campus Map</button>
 </footer>
@@ -77,4 +82,3 @@ function goBack() {
 
 </body>
 </html>
-
