@@ -7,11 +7,22 @@
 
 <style>
 body {
+    margin: 0;
     font-family: Arial, sans-serif;
     background: radial-gradient(circle at center, #081b29, #000000);
-    text-align: center;
-    padding: 20px;
     color: #00eaff;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Main Content Centered */
+.main-content {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
 }
 
 /* Second Floor Image */
@@ -21,7 +32,14 @@ body {
     border: 2px solid #00eaff;
     border-radius: 12px;
     box-shadow: 0 0 25px #00eaff;
-    margin-bottom: 25px;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 20px 0;
+    background: #000;
+    box-shadow: 0 -5px 15px rgba(0, 234, 255, 0.3);
 }
 
 /* Back Button */
@@ -48,17 +66,17 @@ button:hover {
 
 <body>
 
-<!-- SECOND FLOOR IMAGE -->
-<img src="second.jpg" alt="Second Floor Layout" class="floor-img">
+<div class="main-content">
+    <img src="second.jpg" alt="Second Floor Layout" class="floor-img">
+</div>
 
-<!-- BACK BUTTON -->
-<br>
-<button onclick="goBack()">⟵ Back to Campus Map</button>
+<footer>
+    <button onclick="goBack()">⟵ Back to Campus Map</button>
+</footer>
 
 <script>
 function goBack() {
-    window.location.href = "map.html"; 
-    // palitan kung iba filename ng campus map mo
+    window.location.href = "map.html";
 }
 </script>
 
