@@ -1,9 +1,10 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Olinsterg College Feedback & Admin</title>
+<title>Admin Messages – Olinsterg College Digital Map</title>
 
 <style>
 /* GLOBAL STYLE */
@@ -29,21 +30,16 @@ header {text-align:center; padding:25px; text-shadow:0 0 10px #00d4ff,0 0 20px #
 header h1 {font-size:36px; color:#00e5ff;}
 header p {color:#80e0ff; font-size:16px;}
 
-.container {width:90%; max-width:1000px; margin:20px auto;}
+.container {width:90%; max-width:1000px; margin:40px auto;}
 
-h2 {text-align:center; color:#00ffff; font-size:28px; margin-bottom:15px; text-shadow:0 0 10px #00ffff,0 0 20px #00d4ff;}
-
-.feedback-form {background: rgba(0,51,102,0.8); padding: 20px; border-radius: 12px; box-shadow:0 0 15px #00d4ff; margin-bottom:30px;}
-.feedback-form input, .feedback-form textarea {width:100%; padding:10px; margin:10px 0; border-radius:5px; border:none; font-size:15px;}
-.feedback-form button {padding:10px 20px; border-radius:5px; border:none; background:#00d4ff; color:#001a33; cursor:pointer; font-weight:bold;}
-.feedback-form button:hover {background:#00ffff;}
+h2 {text-align:center; color:#00ffff; font-size:28px; margin-bottom:25px; text-shadow:0 0 10px #00ffff,0 0 20px #00d4ff;}
 
 .messages-box {
     background: rgba(0,51,102,0.8);
     padding: 20px;
     border-radius: 12px;
     box-shadow:0 0 15px #00d4ff;
-    max-height: 60vh;
+    max-height: 500px;
     overflow-y: auto;
 }
 
@@ -57,141 +53,78 @@ h2 {text-align:center; color:#00ffff; font-size:28px; margin-bottom:15px; text-s
 .message p {color:#ccefff; margin-bottom:5px; font-size:15px;}
 .message em {color:#80e0ff; font-size:13px;}
 
-.actions {margin-top: 15px; text-align:center;}
-.actions button {
+.actions {
+    margin-top: 25px;
+    text-align:center;
+}
+
+.actions a {
     display:inline-block;
     margin:5px;
     color: #00d4ff;
-    background: rgba(0,0,0,0.3);
-    border:none;
-    padding:10px 20px;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 10px 20px;
     border-radius:8px;
-    font-weight:bold;
-    cursor:pointer;
+    background: rgba(0,0,0,0.3);
     box-shadow:0 0 10px #00d4ff;
 }
-.actions button:hover {background: rgba(0,255,255,0.2); color:#00ffff;}
 
-.messages-box::-webkit-scrollbar {
-    width: 8px;
-}
-.messages-box::-webkit-scrollbar-thumb {
-    background: #00d4ff;
-    border-radius: 4px;
-}
-.messages-box::-webkit-scrollbar-track {
-    background: rgba(0,51,102,0.3);
+.actions a:hover {
+    background: rgba(0,255,255,0.2);
+    color: #00ffff;
 }
 </style>
-
-<!-- Firebase -->
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
-
 </head>
+
 <body>
 
 <header>
     <h1>Olinsterg College Digital Map</h1>
-    <p>Feedback & Admin Messages</p>
+    <p>Admin Messages</p>
 </header>
 
 <div class="container">
-
-    <!-- FEEDBACK FORM -->
-    <h2>Submit Feedback</h2>
-    <div class="feedback-form">
-        <input type="text" id="name" placeholder="Your Name" required>
-        <input type="email" id="email" placeholder="Your Email" required>
-        <textarea id="message" placeholder="Your Message" rows="4" required></textarea>
-        <button onclick="sendMessage()">Send Message</button>
-    </div>
-
-    <!-- MESSAGES -->
     <h2>User Feedback Messages</h2>
+
     <div class="messages-box" id="messagesBox">
-        <p style='text-align:center; color:#80e0ff;'>Loading messages...</p>
+        <!-- Messages will load here -->
     </div>
 
     <div class="actions">
-        <button onclick="clearMessages()">🗑 Clear All Messages</button>
+        <a href="#" onclick="clearMessages()">🗑 Clear All Messages</a>
+        <a href="admin.html">⟵ Back to Dashboard</a>
     </div>
-
 </div>
 
 <script>
-// ====== Firebase Config ======
-const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "olinstergmapv2.firebaseapp.com",
-  databaseURL: "https://olinstergmapv2-default-rtdb.firebaseio.com",
-  projectId: "olinstergmapv2",
-  storageBucket: "olinstergmapv2.appspot.com",
-  messagingSenderId: "YOUR_SENDER_ID",
-  appId: "YOUR_APP_ID"
-};
-firebase.initializeApp(firebaseConfig);
-const db = firebase.database();
-
-// ====== SEND MESSAGE FUNCTION ======
-function sendMessage(){
-    const name = document.getElementById('name').value.trim();
-    const email = document.getElementById('email').value.trim();
-    const message = document.getElementById('message').value.trim();
-
-    if(!name || !email || !message){
-        alert("Please fill in all fields.");
-        return;
-    }
-
-    const newMessageRef = db.ref('messages').push();
-    newMessageRef.set({
-        name: name,
-        email: email,
-        message: message,
-        date: new Date().toLocaleString(),
-        timestamp: Date.now()
-    }, (error)=>{
-        if(error){
-            alert("Error sending message. Try again.");
-        } else {
-            alert("Message sent successfully!");
-            document.getElementById('name').value="";
-            document.getElementById('email').value="";
-            document.getElementById('message').value="";
-        }
-    });
-}
-
-// ====== DISPLAY MESSAGES IN REALTIME ======
 const messagesBox = document.getElementById('messagesBox');
-function displayMessages(messages){
-    if(!messages){
-        messagesBox.innerHTML = "<p style='text-align:center; color:#80e0ff;'>No messages yet.</p>";
-        return;
+let messages = JSON.parse(localStorage.getItem('messages') || '[]');
+
+// DISPLAY MESSAGES
+function displayMessages(){
+    if(messages.length === 0){
+        messagesBox.innerHTML =
+            "<p style='text-align:center; color:#80e0ff;'>No messages yet.</p>";
+    } else {
+        messagesBox.innerHTML = messages.map(msg => `
+            <div class="message">
+                <h3>${msg.name} (${msg.email})</h3>
+                <p>${msg.message}</p>
+                <em>${msg.date}</em>
+            </div>
+        `).join('');
     }
-
-    // Sort newest first
-    const messagesArray = Object.entries(messages).sort((a,b) => b[1].timestamp - a[1].timestamp);
-
-    messagesBox.innerHTML = messagesArray.map(([key,msg]) => `
-        <div class="message">
-            <h3>${msg.name} (${msg.email})</h3>
-            <p>${msg.message}</p>
-            <em>${msg.date}</em>
-        </div>
-    `).join('');
 }
 
-// Realtime listener
-db.ref('messages').on('value', snapshot => {
-    displayMessages(snapshot.val());
-});
+displayMessages();
 
-// ====== CLEAR ALL MESSAGES ======
+// CLEAR ALL FEEDBACK
 function clearMessages(){
     if(confirm("Are you sure you want to delete all feedback messages?")){
-        db.ref('messages').remove();
+        localStorage.removeItem('messages');
+        messages = [];
+        displayMessages();
         alert("All feedback messages have been cleared.");
     }
 }
