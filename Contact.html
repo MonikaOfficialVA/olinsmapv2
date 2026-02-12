@@ -141,7 +141,7 @@ const db = firebase.database();
 const form = document.getElementById('contactForm');
 const confirmation = document.getElementById('confirmation');
 
-form.addEventListener('submit', function(e) {
+form.addEventListener('submit', function(e){
     e.preventDefault();
 
     const name = document.getElementById('name').value.trim();
@@ -153,22 +153,20 @@ form.addEventListener('submit', function(e) {
         return;
     }
 
-    // SEND MESSAGE TO FIREBASE
-    const newMessageRef = db.ref('messages').push();
-    newMessageRef.set({
+    // PUSH TO FIREBASE
+    db.ref('messages').push({
         name: name,
         email: email,
         message: message,
         date: new Date().toLocaleString(),
         timestamp: Date.now()
-    }, (error) => {
-        if(error){
-            alert("Error sending message. Try again.");
-        } else {
-            confirmation.style.display = 'block';
-            confirmation.innerHTML = `Thank you, <strong>${name}</strong>! Your message has been received.`;
-            form.reset();
-        }
+    }).then(() => {
+        confirmation.style.display = 'block';
+        confirmation.innerHTML = `Thank you, <strong>${name}</strong>! Your message has been received.`;
+        form.reset();
+    }).catch((error) => {
+        console.error("Firebase error:", error);
+        alert("Error sending message. Try again.");
     });
 });
 </script>
