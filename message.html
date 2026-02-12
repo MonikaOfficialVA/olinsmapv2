@@ -38,7 +38,7 @@ h2 {text-align:center; color:#00ffff; font-size:28px; margin-bottom:25px; text-s
     padding: 20px;
     border-radius: 12px;
     box-shadow:0 0 15px #00d4ff;
-    max-height: 500px;
+    max-height: 60vh;
     overflow-y: auto;
 }
 
@@ -73,9 +73,24 @@ h2 {text-align:center; color:#00ffff; font-size:28px; margin-bottom:25px; text-s
     background: rgba(0,255,255,0.2);
     color: #00ffff;
 }
-</style>
-</head>
 
+.messages-box::-webkit-scrollbar {
+    width: 8px;
+}
+.messages-box::-webkit-scrollbar-thumb {
+    background: #00d4ff;
+    border-radius: 4px;
+}
+.messages-box::-webkit-scrollbar-track {
+    background: rgba(0,51,102,0.3);
+}
+</style>
+
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+
+</head>
 <body>
 
 <header>
@@ -87,7 +102,7 @@ h2 {text-align:center; color:#00ffff; font-size:28px; margin-bottom:25px; text-s
     <h2>User Feedback Messages</h2>
 
     <div class="messages-box" id="messagesBox">
-        <!-- Messages will load here -->
+        <p style='text-align:center; color:#80e0ff;'>Loading messages...</p>
     </div>
 
     <div class="actions">
@@ -97,33 +112,46 @@ h2 {text-align:center; color:#00ffff; font-size:28px; margin-bottom:25px; text-s
 </div>
 
 <script>
+// ======= Firebase Config =======
+const firebaseConfig = {
+  apiKey: "YOUR_API_KEY",
+  authDomain: "olinstergmapv2.firebaseapp.com",
+  databaseURL: "https://olinstergmapv2-default-rtdb.firebaseio.com",
+  projectId: "olinstergmapv2",
+  storageBucket: "olinstergmapv2.appspot.com",
+  messagingSenderId: "YOUR_SENDER_ID",
+  appId: "YOUR_APP_ID"
+};
+firebase.initializeApp(firebaseConfig);
+const db = firebase.database();
 const messagesBox = document.getElementById('messagesBox');
-let messages = JSON.parse(localStorage.getItem('messages') || '[]');
 
-// DISPLAY MESSAGES
-function displayMessages(){
-    if(messages.length === 0){
-        messagesBox.innerHTML =
-            "<p style='text-align:center; color:#80e0ff;'>No messages yet.</p>";
-    } else {
-        messagesBox.innerHTML = messages.map(msg => `
-            <div class="message">
-                <h3>${msg.name} (${msg.email})</h3>
-                <p>${msg.message}</p>
-                <em>${msg.date}</em>
-            </div>
-        `).join('');
+// ======= DISPLAY MESSAGES =======
+function displayMessages(messages){
+    if(!messages){
+        messagesBox.innerHTML = "<p style='text-align:center; color:#80e0ff;'>No messages yet.</p>";
+        return;
     }
+    // Sort messages newest first
+    const messagesArray = Object.entries(messages).sort((a,b) => b[1].timestamp - a[1].timestamp);
+    messagesBox.innerHTML = messagesArray.map(([key,msg]) => `
+        <div class="message">
+            <h3>${msg.name} (${msg.email})</h3>
+            <p>${msg.message}</p>
+            <em>${msg.date}</em>
+        </div>
+    `).join('');
 }
 
-displayMessages();
+// Listen for realtime updates
+db.ref('messages').on('value', snapshot => {
+    displayMessages(snapshot.val());
+});
 
-// CLEAR ALL FEEDBACK
+// ======= CLEAR ALL MESSAGES =======
 function clearMessages(){
     if(confirm("Are you sure you want to delete all feedback messages?")){
-        localStorage.removeItem('messages');
-        messages = [];
-        displayMessages();
+        db.ref('messages').remove();
         alert("All feedback messages have been cleared.");
     }
 }
