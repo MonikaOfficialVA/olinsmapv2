@@ -72,6 +72,11 @@ textarea {height:130px;}
     box-shadow:0 0 15px #00d4ff;
 }
 </style>
+
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+
 </head>
 
 <body>
@@ -120,6 +125,19 @@ textarea {height:130px;}
 </div>
 
 <script>
+// ===== Firebase Config =====
+const firebaseConfig = {
+  apiKey: "YOUR_API_KEY",
+  authDomain: "olinstergmapv2.firebaseapp.com",
+  databaseURL: "https://olinstergmapv2-default-rtdb.firebaseio.com",
+  projectId: "olinstergmapv2",
+  storageBucket: "olinstergmapv2.appspot.com",
+  messagingSenderId: "YOUR_SENDER_ID",
+  appId: "YOUR_APP_ID"
+};
+firebase.initializeApp(firebaseConfig);
+const db = firebase.database();
+
 const form = document.getElementById('contactForm');
 const confirmation = document.getElementById('confirmation');
 
@@ -130,20 +148,28 @@ form.addEventListener('submit', function(e) {
     const email = document.getElementById('email').value.trim();
     const message = document.getElementById('message').value.trim();
 
-    let messages = JSON.parse(localStorage.getItem('messages') || '[]');
-    messages.push({
+    if(!name || !email || !message){
+        alert("Please fill in all fields.");
+        return;
+    }
+
+    // SEND MESSAGE TO FIREBASE
+    const newMessageRef = db.ref('messages').push();
+    newMessageRef.set({
         name: name,
         email: email,
         message: message,
-        date: new Date().toLocaleString()
+        date: new Date().toLocaleString(),
+        timestamp: Date.now()
+    }, (error) => {
+        if(error){
+            alert("Error sending message. Try again.");
+        } else {
+            confirmation.style.display = 'block';
+            confirmation.innerHTML = `Thank you, <strong>${name}</strong>! Your message has been received.`;
+            form.reset();
+        }
     });
-    localStorage.setItem('messages', JSON.stringify(messages));
-
-    // FIXED — added backticks
-    confirmation.style.display = 'block';
-    confirmation.innerHTML = `Thank you, <strong>${name}</strong>! Your message has been received.`;
-
-    form.reset();
 });
 </script>
 
