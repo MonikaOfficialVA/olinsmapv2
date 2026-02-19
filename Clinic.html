@@ -1,10 +1,9 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Legend Key - Canteen</title>
+<title>Legend Key - Faculty</title>
 
 <style>
 body {
@@ -21,6 +20,7 @@ body {
 .main-content {
     flex: 1;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     padding: 20px;
@@ -33,6 +33,16 @@ body {
     border: 2px solid #00eaff;
     border-radius: 12px;
     box-shadow: 0 0 25px #00eaff;
+}
+
+/* Map Description */
+.map-description {
+    margin-top: 15px;
+    font-size: 16px;
+    text-align: center;
+    color: #00eaff;
+    text-shadow: 0 0 6px #00eaff;
+    max-width: 600px;
 }
 
 /* Footer */
@@ -68,7 +78,10 @@ button:hover {
 <body>
 
 <div class="main-content">
-    <img src="faculty.png" alt="Legend Key - Canteen" class="legend-img">
+    <img src="faculty.png" alt="Legend Key - Faculty" class="legend-img">
+    <p class="map-description">
+        This map highlights the faculty area, showing the locations of classrooms, offices, and staff rooms for easy navigation around the faculty zone.
+    </p>
 </div>
 
 <footer>
