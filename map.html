@@ -12,9 +12,6 @@ body {
     color: #00eaff;
     margin: 0;
     padding: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* center everything horizontally */
 }
 
 /* Header */
@@ -22,8 +19,6 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 100%;
-    max-width: 1200px;
     margin-bottom: 20px;
 }
 
@@ -64,9 +59,13 @@ h2 {
     font-weight: bold;
 }
 
-.menu a:last-child { border-bottom: none; }
+.menu a:last-child {
+    border-bottom: none;
+}
 
-.menu a:hover { background: rgba(0, 40, 70, 0.8); }
+.menu a:hover {
+    background: rgba(0, 40, 70, 0.8);
+}
 
 /* See All / See Less button */
 .toggle-btn {
@@ -83,12 +82,9 @@ h2 {
     overflow-x: auto;
     overflow-y: hidden;
     width: 100%;
-    max-width: 1200px;
     scroll-behavior: smooth;
     padding-bottom: 10px;
     margin: 25px 0 0 0; 
-    display: flex;
-    justify-content: center;
 }
 
 .scroll-container {
@@ -105,12 +101,9 @@ h2 {
     border-radius: 4px;
 }
 
-/* Card as button with centered image */
+/* Card as button */
 .card {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
+    display: block; /* makes <a> block */
     flex: 0 0 auto;
     width: 150px;
     background: rgba(0, 20, 40, 0.8);
@@ -120,9 +113,8 @@ h2 {
     transition: transform 0.3s, box-shadow 0.3s;
     cursor: pointer;
     text-align: center;
-    text-decoration: none;
+    text-decoration: none; /* remove underline for <a> */
     color: #00eaff;
-    padding: 5px;
 }
 
 .card:hover {
@@ -131,22 +123,19 @@ h2 {
 }
 
 .card img {
-    width: auto;
-    max-width: 90%;
-    height: auto;
-    max-height: 110px;
-    border-radius: 10px;
-    object-fit: contain;
-    margin-bottom: 5px;
-    display: block;
+    width: 100%;
+    height: 110px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    object-fit: cover;
 }
 
 .card p {
-    margin: 0;
+    margin: 5px 0;
     font-size: 0.9rem;
     font-weight: bold;
     text-shadow: 0 0 5px #00eaff;
-    pointer-events: none;
+    pointer-events: none; /* ensures click goes to <a> */
 }
 
 /* Full grid view with animation */
@@ -155,7 +144,6 @@ h2 {
     gap: 15px;
     flex-wrap: wrap;
     justify-content: center;
-    max-width: 1200px;
     margin-top: 20px;
     opacity: 0;
     transform: translateY(-20px);
@@ -163,6 +151,7 @@ h2 {
     transition: opacity 0.5s ease, transform 0.5s ease;
 }
 
+/* Individual staggered card animation */
 .full-grid .card {
     opacity: 0;
     transform: translateY(-20px);
@@ -186,14 +175,17 @@ h2 {
 .full-grid.show .card:nth-child(9) { animation-delay: 0.45s; }
 
 @keyframes fadeSlide {
-    to { opacity: 1; transform: translateY(0); }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 /* Responsive */
 @media (max-width: 600px) {
     h2 { font-size: 5vw; }
     .card { width: 120px; }
-    .card img { max-height: 90px; }
+    .card img { height: 90px; }
     .card p { font-size: 3.5vw; }
     .icon-btn, .hamburger { font-size: 2rem; }
     .toggle-btn { font-size: 4vw; }
@@ -229,33 +221,33 @@ h2 {
 <!-- Scrollable cards -->
 <div class="scroll-wrapper" id="scrollWrapper">
     <div class="scroll-container">
-        <a href="ground.html" class="card"><img src="ground.jpg" alt="Ground Floor"><p>Ground Floor</p></a>
-        <a href="second.html" class="card"><img src="second.jpg" alt="Second Floor"><p>Second Floor</p></a>
-        <a href="third.html" class="card"><img src="third.jpg" alt="Third Floor"><p>Third Floor</p></a>
-        <a href="Roof.html" class="card"><img src="roof.jpg" alt="Roof Deck"><p>Roof Deck</p></a>
-        <a href="Library.html" class="card"><img src="library.png" alt="Library"><p>Library</p></a>
-        <a href="Faculty.html" class="card"><img src="faculty.png" alt="Faculty Office"><p>Faculty Office</p></a>
-        <a href="Canteen.html" class="card"><img src="canteen.jpg" alt="Canteen"><p>Canteen</p></a>
-        <a href="Lobby.html" class="card"><img src="lobby.jpg" alt="Lobby"><p>Lobby</p></a>
-        <a href="Clinic.html" class="card"><img src="cli.jpg" alt="Clinic"><p>Clinic</p></a>
-        <a href="legend.html" class="card"><img src="images/legend.jpg" alt="Legend Key"><p>Legend Key</p></a>
-        <a href="Olins map.html" class="card"><img src="images/allmap.jpg" alt="All Campus Map"><p>All Campus Map</p></a>
+        <a href="ground.html" class="card"><img src="ground.jpg" alt=""><p>Ground Floor</p></a>
+        <a href="second.html" class="card"><img src="second.jpg" alt=""><p>Second Floor</p></a>
+        <a href="third.html" class="card"><img src="third.jpg" alt=""><p>Third Floor</p></a>
+        <a href="Roof.html" class="card"><img src="roof.jpg" alt=""><p>Roof Deck</p></a>
+        <a href="Library.html" class="card"><img src="library.png" alt=""><p>Library</p></a>
+        <a href="Faculty.html" class="card"><img src="faculty.png" alt=""><p>Faculty Office</p></a>
+        <a href="Canteen.html" class="card"><img src="canteen.jpg" alt=""><p>Canteen</p></a>
+        <a href="Lobby.html" class="card"><img src="lobby.jpg" alt=""><p>Lobby</p></a>
+        <a href="Clinic.html" class="card"><img src="cli.jpg" alt=""><p>Clinic</p></a>
+        <a href="legend.html" class="card"><img src="images/legend.jpg" alt=""><p>Legend Key</p></a>
+        <a href="Olins map.html" class="card"><img src="images/allmap.jpg" alt=""><p>All Campus Map</p></a>
     </div>
 </div>
 
 <!-- Full grid -->
 <div class="full-grid" id="fullGrid">
-    <a href="ground.html" class="card"><img src="ground.jpg" alt="Ground Floor"><p>Ground Floor</p></a>
-    <a href="second.html" class="card"><img src="second.jpg" alt="Second Floor"><p>Second Floor</p></a>
-    <a href="third.html" class="card"><img src="third.jpg" alt="Third Floor"><p>Third Floor</p></a>
-    <a href="Roof.html" class="card"><img src="roof.jpg" alt="Roof Deck"><p>Roof Deck</p></a>
-    <a href="Library.html" class="card"><img src="library.png" alt="Library"><p>Library</p></a>
-    <a href="Faculty.html" class="card"><img src="faculty.png" alt="Faculty Office"><p>Faculty Office</p></a>
-    <a href="Canteen.html" class="card"><img src="canteen.jpg" alt="Canteen"><p>Canteen</p></a>
-    <a href="Lobby.html" class="card"><img src="lobby.jpg" alt="Lobby"><p>Lobby</p></a>
-    <a href="Clinic.html" class="card"><img src="cli.jpg" alt="Clinic"><p>Clinic</p></a>
-    <a href="legend.html" class="card"><img src="images/legend.jpg" alt="Legend Key"><p>Legend Key</p></a>
-    <a href="Olins map.html" class="card"><img src="images/allmap.jpg" alt="All Campus Map"><p>All Campus Map</p></a>
+    <a href="ground.html" class="card"><img src="ground.jpg" alt=""><p>Ground Floor</p></a>
+    <a href="second.html" class="card"><img src="second.jpg" alt=""><p>Second Floor</p></a>
+    <a href="third.html" class="card"><img src="third.jpg" alt=""><p>Third Floor</p></a>
+    <a href="Roof.html" class="card"><img src="roof.jpg" alt=""><p>Roof Deck</p></a>
+    <a href="Library.html" class="card"><img src="library.png" alt=""><p>Library</p></a>
+    <a href="Faculty.html" class="card"><img src="faculty.png" alt=""><p>Faculty Office</p></a>
+    <a href="Canteen.html" class="card"><img src="canteen.jpg" alt=""><p>Canteen</p></a>
+    <a href="Lobby.html" class="card"><img src="lobby.jpg" alt=""><p>Lobby</p></a>
+    <a href="Clinic.html" class="card"><img src=".jpg" alt=""><p>Clinic</p></a>
+    <a href="legend.html" class="card"><img src="legend.jpg" alt=""><p>Legend Key</p></a>
+    <a href="Olins map.html" class="card"><img src="allmap.jpg" alt=""><p>All Campus Map</p></a>
 </div>
 
 <script>
@@ -278,20 +270,11 @@ function toggleView() {
         expanded = true;
     } else {
         grid.classList.remove('show');
-        scroll.style.display = 'flex';
+        scroll.style.display = 'block';
         btn.textContent = 'See All';
         expanded = false;
     }
 }
-
-// Close menu if clicking outside
-window.addEventListener('click', function(e) {
-    const menu = document.getElementById('menu');
-    const hamburger = document.querySelector('.hamburger');
-    if (!menu.contains(e.target) && !hamburger.contains(e.target)) {
-        menu.style.display = 'none';
-    }
-});
 </script>
 
 </body>
