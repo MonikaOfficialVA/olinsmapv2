@@ -9,137 +9,273 @@
 body {
     font-family: Arial, sans-serif;
     background: radial-gradient(circle at center, #081b29, #000000);
-    text-align: center;
-    padding: 20px;
     color: #00eaff;
+    margin: 0;
+    padding: 20px;
+}
+
+/* Header */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.icon-btn, .hamburger {
+    cursor: pointer;
+    font-size: 2.5rem;
+    color: #00eaff;
+    text-shadow: 0 0 8px #00eaff;
 }
 
 h2 {
+    font-size: 2rem;
+    text-align: center;
+    flex: 1;
+    margin: 0 20px;
     text-shadow: 0 0 10px #00eaff;
-    margin-bottom: 20px;
-    font-size: 28px;
 }
 
-svg {
+/* Hamburger dropdown menu */
+.menu {
+    display: none;
+    position: absolute;
+    top: 60px;
+    right: 20px;
+    background: rgba(0, 20, 40, 0.95);
     border: 2px solid #00eaff;
-    background: rgba(0, 20, 40, 0.6);
-    max-width: 900px;
-    width: 100%;
-    border-radius: 12px;
-    box-shadow: 0 0 20px #00eaff;
+    border-radius: 10px;
+    flex-direction: column;
+    min-width: 180px;
+    z-index: 10;
 }
 
-.building {
-    fill: url(#neonGradient);
-    cursor: pointer;
-    transition: 0.3s;
-    stroke: #00eaff;
-    stroke-width: 2px;
-    filter: drop-shadow(0 0 6px #00eaff);
-}
-
-.building:hover {
-    fill: url(#hoverGradient);
-    filter: drop-shadow(0 0 12px #00eaff);
-    transform: scale(1.03);
-}
-
-text {
-    fill: #ffffff;
-    font-size: 15px;
-    text-anchor: middle;
-    text-shadow: 0 0 6px #00eaff;
-}
-
-.back {
-    display: block;
-    margin-top: 25px;
-    text-decoration: none;
+.menu a {
     color: #00eaff;
+    padding: 10px 15px;
+    text-decoration: none;
+    border-bottom: 1px solid #00eaff;
     font-weight: bold;
-    font-size: 18px;
-    text-shadow: 0 0 10px #00eaff;
+}
+
+.menu a:last-child {
+    border-bottom: none;
+}
+
+.menu a:hover {
+    background: rgba(0, 40, 70, 0.8);
+}
+
+/* See All / See Less button */
+.toggle-btn {
+    font-weight: bold;
+    color: #00eaff;
+    text-shadow: 0 0 8px #00eaff;
+    margin: 20px 0 10px 0;
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+/* Scroll container */
+.scroll-wrapper {
+    overflow-x: auto;
+    overflow-y: hidden;
+    width: 100%;
+    scroll-behavior: smooth;
+    padding-bottom: 10px;
+    margin: 25px 0 0 0; 
+}
+
+.scroll-container {
+    display: flex;
+    gap: 15px;
+}
+
+.scroll-container::-webkit-scrollbar {
+    height: 8px;
+}
+
+.scroll-container::-webkit-scrollbar-thumb {
+    background-color: #00eaff;
+    border-radius: 4px;
+}
+
+/* Card as button */
+.card {
+    display: block; /* makes <a> block */
+    flex: 0 0 auto;
+    width: 150px;
+    background: rgba(0, 20, 40, 0.8);
+    border: 2px solid #00eaff;
+    border-radius: 12px;
+    box-shadow: 0 0 15px #00eaff;
+    transition: transform 0.3s, box-shadow 0.3s;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none; /* remove underline for <a> */
+    color: #00eaff;
+}
+
+.card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 25px #00ffff;
+}
+
+.card img {
+    width: 100%;
+    height: 110px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    object-fit: cover;
+}
+
+.card p {
+    margin: 5px 0;
+    font-size: 0.9rem;
+    font-weight: bold;
+    text-shadow: 0 0 5px #00eaff;
+    pointer-events: none; /* ensures click goes to <a> */
+}
+
+/* Full grid view with animation */
+.full-grid {
+    display: flex; 
+    gap: 15px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 20px;
+    opacity: 0;
+    transform: translateY(-20px);
+    pointer-events: none;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+/* Individual staggered card animation */
+.full-grid .card {
+    opacity: 0;
+    transform: translateY(-20px);
+    animation: fadeSlide 0.5s forwards;
+}
+
+.full-grid.show {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+.full-grid.show .card:nth-child(1) { animation-delay: 0.05s; }
+.full-grid.show .card:nth-child(2) { animation-delay: 0.1s; }
+.full-grid.show .card:nth-child(3) { animation-delay: 0.15s; }
+.full-grid.show .card:nth-child(4) { animation-delay: 0.2s; }
+.full-grid.show .card:nth-child(5) { animation-delay: 0.25s; }
+.full-grid.show .card:nth-child(6) { animation-delay: 0.3s; }
+.full-grid.show .card:nth-child(7) { animation-delay: 0.35s; }
+.full-grid.show .card:nth-child(8) { animation-delay: 0.4s; }
+.full-grid.show .card:nth-child(9) { animation-delay: 0.45s; }
+
+@keyframes fadeSlide {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    h2 { font-size: 5vw; }
+    .card { width: 120px; }
+    .card img { height: 90px; }
+    .card p { font-size: 3.5vw; }
+    .icon-btn, .hamburger { font-size: 2rem; }
+    .toggle-btn { font-size: 4vw; }
 }
 </style>
 </head>
 
 <body>
 
-<h2>Olinsterg College Campus Map</h2>
+<header>
+    <span class="icon-btn" onclick="goToUser()">&#8592;</span>
+    <h2>Olinsterg College Campus Map</h2>
+    <span class="hamburger" onclick="toggleMenu()">&#9776;</span>
 
-<svg viewBox="0 0 900 650">
+    <div class="menu" id="menu">
+        <a href="user.html">Dashboard</a>
+        <a href="legend.html">Legend Key</a>
+        <a href="ground.html">Ground Floor</a>
+        <a href="second.html">Second Floor</a>
+        <a href="third.html">Third Floor</a>
+        <a href="Roof.html">Roof Deck</a>
+        <a href="Library.html">Library</a>
+        <a href="Faculty.html">Faculty Office</a>
+        <a href="Canteen.html">Canteen</a>
+        <a href="Lobby.html">Lobby</a>
+        <a href="Clinic.html">Clinic</a>
+        <a href="Olins map.html">All Campus Map</a>
+    </div>
+</header>
 
-<defs>
-    <linearGradient id="neonGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" stop-color="#005eff"/>
-        <stop offset="100%" stop-color="#00eaff"/>
-    </linearGradient>
+<div class="toggle-btn" id="toggleBtn" onclick="toggleView()">See All</div>
 
-    <linearGradient id="hoverGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" stop-color="#00eaff"/>
-        <stop offset="100%" stop-color="#00ffff"/>
-    </linearGradient>
-</defs>
+<!-- Scrollable cards -->
+<div class="scroll-wrapper" id="scrollWrapper">
+    <div class="scroll-container">
+        <a href="ground.html" class="card"><img src="ground.jpg" alt=""><p>Ground Floor</p></a>
+        <a href="second.html" class="card"><img src="second.jpg" alt=""><p>Second Floor</p></a>
+        <a href="third.html" class="card"><img src="third.jpg" alt=""><p>Third Floor</p></a>
+        <a href="Roof.html" class="card"><img src="roof.jpg" alt=""><p>Roof Deck</p></a>
+        <a href="Library.html" class="card"><img src="library.png" alt=""><p>Library</p></a>
+        <a href="Faculty.html" class="card"><img src="faculty.png" alt=""><p>Faculty Office</p></a>
+        <a href="Canteen.html" class="card"><img src="canteen.jpg" alt=""><p>Canteen</p></a>
+        <a href="Lobby.html" class="card"><img src="lobby.jpg" alt=""><p>Lobby</p></a>
+        <a href="Clinic.html" class="card"><img src="cli.jpg" alt=""><p>Clinic</p></a>
+        <a href="legend.html" class="card"><img src="images/legend.jpg" alt=""><p>Legend Key</p></a>
+        <a href="Olins map.html" class="card"><img src="images/allmap.jpg" alt=""><p>All Campus Map</p></a>
+    </div>
+</div>
 
-<rect x="40" y="40" width="820" height="570"
-      fill="rgba(0,40,70,0.6)"
-      stroke="#00eaff"
-      stroke-width="3"/>
-
-<!-- ROW 1 -->
-<rect class="building" x="80" y="80" width="160" height="90" onclick="goTo('legend.html')" />
-<text id="legend" x="160" y="135">Legend Key</text>
-
-<rect class="building" x="280" y="80" width="160" height="90" onclick="goTo('ground.html')" />
-<text id="ground" x="360" y="135">Ground Floor</text>
-
-<rect class="building" x="480" y="80" width="160" height="90" onclick="goTo('second.html')" />
-<text id="second" x="560" y="135">Second Floor</text>
-
-<rect class="building" x="680" y="80" width="160" height="90" onclick="goTo('third.html')" />
-<text id="third" x="760" y="135">Third Floor</text>
-
-<!-- ROW 2 -->
-<rect class="building" x="80" y="210" width="160" height="90" onclick="goTo('Roof.html')" />
-<text id="roof" x="160" y="265">Roof Deck</text>
-
-<rect class="building" x="280" y="210" width="160" height="90" onclick="goTo('library.html')" />
-<text id="library" x="360" y="265">Library</text>
-
-<rect class="building" x="480" y="210" width="160" height="90" onclick="goTo('faculty.html')" />
-<text id="faculty" x="560" y="265">Faculty Office</text>
-
-<rect class="building" x="680" y="210" width="160" height="90" onclick="goTo('Canteen.html')" />
-<text id="cafeteria" x="760" y="265">Canteen</text>
-
-<!-- ROW 3 -->
-<rect class="building" x="180" y="340" width="180" height="100" onclick="goTo('Lobby.html')" />
-<text id="gym" x="270" y="400">Lobby</text>
-
-<rect class="building" x="520" y="340" width="180" height="100" onclick="goTo('Clinic.html')" />
-<text id="parking" x="610" y="400">Clinic</text>
-
-<rect class="building" x="310" y="480" width="280" height="100" onclick="goTo('Olins map.html')" />
-<text id="allmap" x="450" y="540" style="font-size:18px; font-weight:bold;">All Campus Map</text>
-
-</svg>
-
-<a class="back" href="user.html">⟵ Back to Dashboard</a>
+<!-- Full grid -->
+<div class="full-grid" id="fullGrid">
+    <a href="ground.html" class="card"><img src="ground.jpg" alt=""><p>Ground Floor</p></a>
+    <a href="second.html" class="card"><img src="second.jpg" alt=""><p>Second Floor</p></a>
+    <a href="third.html" class="card"><img src="third.jpg" alt=""><p>Third Floor</p></a>
+    <a href="Roof.html" class="card"><img src="roof.jpg" alt=""><p>Roof Deck</p></a>
+    <a href="Library.html" class="card"><img src="library.png" alt=""><p>Library</p></a>
+    <a href="Faculty.html" class="card"><img src="faculty.png" alt=""><p>Faculty Office</p></a>
+    <a href="Canteen.html" class="card"><img src="canteen.jpg" alt=""><p>Canteen</p></a>
+    <a href="Lobby.html" class="card"><img src="lobby.jpg" alt=""><p>Lobby</p></a>
+    <a href="Clinic.html" class="card"><img src=".jpg" alt=""><p>Clinic</p></a>
+    <a href="legend.html" class="card"><img src="legend.jpg" alt=""><p>Legend Key</p></a>
+    <a href="Olins map.html" class="card"><img src="allmap.jpg" alt=""><p>All Campus Map</p></a>
+</div>
 
 <script>
-// Load saved labels from localStorage (saved by admin)
-document.querySelectorAll("text").forEach(label => {
-    const saved = localStorage.getItem(label.id);
-    if(saved) label.textContent = saved;
-});
+function goToUser() { window.location.href = "user.html"; }
 
-// Navigation
-function goTo(page) {
-    window.location.href = page;
+function toggleMenu() {
+    const menu = document.getElementById('menu');
+    menu.style.display = menu.style.display === 'flex' ? 'none' : 'flex';
+}
+
+let expanded = false;
+function toggleView() {
+    const scroll = document.getElementById('scrollWrapper');
+    const grid = document.getElementById('fullGrid');
+    const btn = document.getElementById('toggleBtn');
+    if (!expanded) {
+        scroll.style.display = 'none';
+        grid.classList.add('show');
+        btn.textContent = 'See Less';
+        expanded = true;
+    } else {
+        grid.classList.remove('show');
+        scroll.style.display = 'block';
+        btn.textContent = 'See All';
+        expanded = false;
+    }
 }
 </script>
 
 </body>
 </html>
-
-
